@@ -1,20 +1,58 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Akhil Joseph - Portfolio
 
-# Run and deploy your AI Studio app
+Netflix-themed portfolio website showcasing experience, projects, skills, and achievements.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/temp/1
+- Netflix-inspired UI/UX design
+- Interactive content cards with hover effects
+- Search functionality
+- Responsive design
+- Contact modal
+- Detail modals for each portfolio item
 
-## Run Locally
+## Tech Stack
 
-**Prerequisites:**  Node.js
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide React (Icons)
 
+## Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Akhil-Joseph11/akhil-joseph11.github.io.git
+   cd akhil-joseph11.github.io
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Deployment
+
+This site is deployed on GitHub Pages at: https://akhil-joseph11.github.io
+
+## License
+
+© 2025 Akhil Joseph. All rights reserved.
