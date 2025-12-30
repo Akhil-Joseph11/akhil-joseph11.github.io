@@ -6,8 +6,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    // 🔥 REQUIRED for GitHub Pages
-    base: '/akhil-joseph11.github.io/',
+    base: '/',
 
     server: {
       port: 3000,
