@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bell, Search, Download } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Bell, Search, Download, Menu, X } from 'lucide-react';
 import { RESUME_DATA, PROFILE_IMAGE, CONTACT_INFO } from '../constants';
 import { ContentItem } from '../types';
 
 interface NavbarProps {
-  onSearchSelect: (item: ContentItem) => void;
-  onContactClick: () => void;
+  onSearchSelect?: (item: ContentItem) => void;
+  onContactClick?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<ContentItem[]>([]);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +34,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
       }
       if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
         setIsNotificationsOpen(false);
+      }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -55,57 +63,92 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
   };
 
   const handleResultClick = (item: ContentItem) => {
-    onSearchSelect(item);
+    if (onSearchSelect) {
+      onSearchSelect(item);
+    }
     setIsSearchOpen(false);
     setSearchQuery('');
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        if (onSearchSelect) {
+          onSearchSelect(item);
+        }
+      }, 100);
+    }
   };
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleAboutClick = () => {
+    setIsMobileMenuOpen(false);
+    if (location.pathname !== '/about') {
+      navigate('/about');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-colors duration-500 ${isScrolled ? 'bg-netflixBlack shadow-md' : 'bg-gradient-to-b from-black/70 to-transparent'}`}>
-      <div className="flex items-center justify-between px-4 md:px-12 py-4">
-        <div className="flex items-center space-x-8">
-          <h1 
-            className="text-netflixRed text-3xl md:text-4xl font-display font-bold cursor-pointer tracking-wider" 
-            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-          >
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-netflixBlack shadow-lg' : 'bg-gradient-to-b from-netflixBlack/80 via-netflixBlack/40 to-transparent'}`}>
+      <div className="flex items-center justify-between px-4 md:px-16 py-3 md:py-4">
+        <div className="flex items-center space-x-4 md:space-x-8">
+          <Link to="/" className="text-netflixRed text-3xl md:text-5xl font-display font-bold cursor-pointer tracking-tight leading-none">
             AKHIL
-          </h1>
-          <ul className="hidden md:flex space-x-6 text-sm text-gray-300">
+          </Link>
+          <ul className="hidden md:flex space-x-4 text-sm font-medium">
             <li>
-              <button onClick={() => scrollToSection('experience')} className="hover:text-white transition font-medium cursor-pointer bg-transparent border-none">
+              <button onClick={handleAboutClick} className="text-white hover:text-netflixLightGray transition-colors duration-200 cursor-pointer bg-transparent border-none">
+                About
+              </button>
+            </li>
+            <li>
+              <button onClick={() => scrollToSection('experience')} className="text-white hover:text-netflixLightGray transition-colors duration-200 cursor-pointer bg-transparent border-none">
                 Experience
               </button>
             </li>
             <li>
-              <button onClick={() => scrollToSection('projects')} className="hover:text-white transition cursor-pointer bg-transparent border-none">
+              <button onClick={() => scrollToSection('projects')} className="text-white hover:text-netflixLightGray transition-colors duration-200 cursor-pointer bg-transparent border-none">
                 Projects
               </button>
             </li>
             <li>
-              <button onClick={() => scrollToSection('skills')} className="hover:text-white transition cursor-pointer bg-transparent border-none">
+              <button onClick={() => scrollToSection('skills')} className="text-white hover:text-netflixLightGray transition-colors duration-200 cursor-pointer bg-transparent border-none">
                 Skills
               </button>
             </li>
             <li>
-              <button onClick={() => scrollToSection('education')} className="hover:text-white transition cursor-pointer bg-transparent border-none">
+              <button onClick={() => scrollToSection('education')} className="text-white hover:text-netflixLightGray transition-colors duration-200 cursor-pointer bg-transparent border-none">
                 Education
               </button>
             </li>
           </ul>
         </div>
         
-        <div className="flex items-center space-x-6 text-white relative">
+        <div className="flex items-center space-x-3 md:space-x-6 text-white relative">
           
-          <div ref={searchRef} className={`flex items-center transition-all duration-300 ${isSearchOpen ? 'bg-black/80 border border-white' : ''} p-1`}>
+          <div ref={searchRef} className={`flex items-center transition-all duration-200 ${isSearchOpen ? 'bg-netflixBlack border border-white/30' : ''} p-1.5 rounded`}>
             <Search 
-              className={`w-5 h-5 cursor-pointer hover:text-gray-300 ${isSearchOpen ? 'mr-2' : ''}`} 
+              className={`w-4 h-4 md:w-5 md:h-5 cursor-pointer text-white hover:text-netflixLightGray transition-colors ${isSearchOpen ? 'mr-2' : ''}`} 
               onClick={() => setIsSearchOpen(!isSearchOpen)}
             />
             {isSearchOpen && (
@@ -114,57 +157,111 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
                   type="text" 
                   autoFocus
                   placeholder="Titles, people, genres" 
-                  className="bg-transparent border-none outline-none text-white text-sm w-48 placeholder-gray-400"
+                  className="bg-transparent border-none outline-none text-white text-xs md:text-sm w-32 md:w-48 placeholder-netflixLightGray"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                 />
                 {searchResults.length > 0 && (
-                   <div className="absolute top-8 right-0 w-64 bg-[#181818] border border-gray-700 max-h-60 overflow-y-auto rounded shadow-xl">
-                      {searchResults.map(item => (
-                        <div 
-                          key={item.id} 
-                          className="p-3 hover:bg-[#2F2F2F] cursor-pointer flex items-center space-x-3"
-                          onClick={() => handleResultClick(item)}
-                        >
-                           <img src={item.image} alt="" className="w-10 h-6 object-cover rounded" />
-                           <div className="flex flex-col overflow-hidden">
-                             <span className="text-xs font-bold truncate">{item.title}</span>
-                             <span className="text-[10px] text-gray-400 truncate">{item.subtitle}</span>
-                           </div>
+                  <div className="absolute top-10 right-0 w-64 md:w-72 bg-netflixBlack border border-white/20 max-h-60 md:max-h-80 overflow-y-auto rounded shadow-2xl z-50">
+                    {searchResults.map(item => (
+                      <div 
+                        key={item.id} 
+                        className="p-2 md:p-3 hover:bg-netflixGray cursor-pointer flex items-center space-x-2 md:space-x-3 transition-colors"
+                        onClick={() => handleResultClick(item)}
+                      >
+                        <img src={item.image} alt="" className="w-10 h-6 md:w-12 md:h-7 object-cover rounded" />
+                        <div className="flex flex-col overflow-hidden">
+                          <span className="text-xs md:text-sm font-semibold text-white truncate">{item.title}</span>
+                          <span className="text-[10px] md:text-xs text-netflixLightGray truncate">{item.subtitle}</span>
                         </div>
-                      ))}
-                   </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
             )}
           </div>
 
-          <div ref={notificationRef} className="relative">
+          <div ref={notificationRef} className="relative hidden md:block">
             <div className="relative cursor-pointer" onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}>
-               <Bell className="w-5 h-5 hover:text-gray-300" />
-               <span className="absolute -top-1 -right-1 bg-red-600 text-[10px] w-3 h-3 rounded-full flex items-center justify-center font-bold">1</span>
+              <Bell className="w-5 h-5 text-white hover:text-netflixLightGray transition-colors" />
+              <span className="absolute -top-1 -right-1 bg-netflixRed text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">1</span>
             </div>
             
             {isNotificationsOpen && (
-              <div className="absolute top-8 right-0 w-72 bg-black/90 border-t-2 border-white text-white shadow-2xl p-0">
-                <div className="p-4 border-b border-gray-700 flex justify-between items-center hover:bg-[#181818]">
-                   <div className="flex flex-col">
-                      <span className="text-sm font-bold mb-1">New Resume Available</span>
-                      <span className="text-xs text-gray-400">Download Akhil's latest CV now.</span>
-                   </div>
-                   <a href={CONTACT_INFO.resume} target="_blank" rel="noreferrer" className="bg-white text-black p-2 rounded-full hover:bg-gray-200">
-                     <Download className="w-4 h-4" />
-                   </a>
+              <div className="absolute top-10 right-0 w-80 bg-netflixBlack border border-white/20 text-white shadow-2xl rounded z-50 overflow-hidden">
+                <div className="p-4 border-b border-white/10 flex justify-between items-center hover:bg-netflixGray transition-colors cursor-pointer">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold mb-1 text-white">New Resume Available</span>
+                    <span className="text-xs text-netflixLightGray">Download Akhil's latest CV now.</span>
+                  </div>
+                  <a href={CONTACT_INFO.resume} target="_blank" rel="noreferrer" className="bg-white text-netflixBlack p-2 rounded-full hover:bg-gray-200 transition-colors">
+                    <Download className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="flex items-center space-x-2 cursor-pointer group" onClick={onContactClick}>
-             <div className="w-8 h-8 rounded-sm overflow-hidden">
-                <img src={PROFILE_IMAGE} alt="Profile" className="w-full h-full object-cover group-hover:opacity-80 transition" />
-             </div>
-             <span className="hidden md:block text-xs group-hover:underline">Akhil</span>
+          <div ref={mobileMenuRef} className="relative md:hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-white hover:text-netflixLightGray transition-colors p-2"
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+            
+            {isMobileMenuOpen && (
+              <div className="absolute top-12 right-0 w-56 bg-netflixBlack border border-white/20 rounded shadow-2xl z-50 overflow-hidden">
+                <button 
+                  onClick={handleAboutClick}
+                  className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-netflixGray transition-colors border-b border-white/10"
+                >
+                  About
+                </button>
+                <button 
+                  onClick={() => scrollToSection('experience')}
+                  className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-netflixGray transition-colors border-b border-white/10"
+                >
+                  Experience
+                </button>
+                <button 
+                  onClick={() => scrollToSection('projects')}
+                  className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-netflixGray transition-colors border-b border-white/10"
+                >
+                  Projects
+                </button>
+                <button 
+                  onClick={() => scrollToSection('skills')}
+                  className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-netflixGray transition-colors border-b border-white/10"
+                >
+                  Skills
+                </button>
+                <button 
+                  onClick={() => scrollToSection('education')}
+                  className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-netflixGray transition-colors border-b border-white/10"
+                >
+                  Education
+                </button>
+                <div 
+                  className="block px-4 py-3 text-sm text-white hover:bg-netflixGray transition-colors cursor-pointer"
+                  onClick={() => {
+                    onContactClick && onContactClick();
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Contact
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="hidden md:flex items-center space-x-3 cursor-pointer group" onClick={() => onContactClick && onContactClick()}>
+            <div className="w-8 h-8 rounded overflow-hidden border border-white/20">
+              <img src={PROFILE_IMAGE} alt="Profile" className="w-full h-full object-cover group-hover:opacity-80 transition" />
+            </div>
+            <span className="text-sm text-white group-hover:text-netflixLightGray transition-colors">Akhil</span>
           </div>
         </div>
       </div>

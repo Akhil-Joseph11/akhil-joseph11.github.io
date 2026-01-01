@@ -29,20 +29,21 @@ export const SectionRow: React.FC<SectionRowProps> = ({ id, title, items, onSele
   };
 
   return (
-    <div id={id} className="h-fit space-y-2 md:space-y-4 px-4 md:px-12 my-8 scroll-mt-24">
-      <h2 className="w-56 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
+    <div id={id} className="h-fit space-y-4 px-16 my-8 scroll-mt-24">
+      <h2 className="w-56 cursor-pointer text-2xl font-semibold text-white transition-colors duration-200 hover:text-netflixRed">
         {title}
       </h2>
       
-      <div className="group relative md:-ml-2">
+      <div className="group relative -ml-2">
         <ChevronLeft 
-          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100 ${!isMoved && 'hidden'}`} 
-          onClick={() => handleClick('left')} 
+          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-12 w-12 cursor-pointer opacity-0 transition-all duration-200 hover:scale-125 group-hover:opacity-100 bg-netflixBlack/80 hover:bg-netflixBlack rounded-full p-2 ${!isMoved && 'hidden'}`} 
+          onClick={() => handleClick('left')}
+          aria-label="Scroll left"
         />
         
         <div 
           ref={rowRef}
-          className="flex items-center space-x-2.5 overflow-x-scroll scrollbar-hide md:space-x-3.5 p-2 py-8 no-scrollbar scroll-smooth"
+          className="flex items-center space-x-3.5 overflow-x-scroll scrollbar-hide p-2 py-8 no-scrollbar scroll-smooth"
         >
           {items.map((item) => (
             <ContentCard key={item.id} item={item} onSelect={onSelect} />
@@ -50,8 +51,9 @@ export const SectionRow: React.FC<SectionRowProps> = ({ id, title, items, onSele
         </div>
         
         <ChevronRight 
-          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100" 
-          onClick={() => handleClick('right')} 
+          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-12 w-12 cursor-pointer opacity-0 transition-all duration-200 hover:scale-125 group-hover:opacity-100 bg-netflixBlack/80 hover:bg-netflixBlack rounded-full p-2" 
+          onClick={() => handleClick('right')}
+          aria-label="Scroll right"
         />
       </div>
     </div>

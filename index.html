@@ -6,6 +6,25 @@
     <title>Akhil Joseph</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              netflixRed: '#E50914',
+              netflixBlack: '#141414',
+              netflixDark: '#000000',
+              netflixGray: '#2F2F2F',
+              netflixLightGray: '#808080',
+            },
+            fontFamily: {
+              'display': ['Bebas Neue', 'cursive'],
+              'sans': ['Inter', 'system-ui', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -18,6 +37,26 @@
       }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      @media (max-width: 768px) {
+        .scrollbar-hide {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .touch-scroll {
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+      }
     </style>
   </head>
   <body>

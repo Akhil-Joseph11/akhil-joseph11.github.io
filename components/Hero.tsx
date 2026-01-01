@@ -1,5 +1,6 @@
 import React from 'react';
-import { Play, Github, Download, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Mail, Github, Download, Linkedin } from 'lucide-react';
 import { HERO_CONTENT, CONTACT_INFO } from '../constants';
 
 interface HeroProps {
@@ -8,55 +9,62 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
   return (
-    <div className="relative h-[80vh] md:h-[95vh] w-full overflow-hidden">
+    <div className="relative h-[95vh] w-full overflow-hidden">
       <div className="absolute inset-0">
         <img 
           src="/images/Akhil-banner.png" 
           alt="Akhil Banner" 
-          className="h-full w-full object-cover blur-sm" 
+          className="h-full w-full object-cover" 
         />
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-netflixBlack via-netflixBlack/70 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-netflixBlack via-netflixBlack/30 to-transparent"></div>
       </div>
-      
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-10"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/40 to-transparent bottom-0 h-96 z-10"></div>
 
-      <div className="absolute top-[25%] md:top-[30%] left-4 md:left-12 max-w-2xl space-y-4 z-20">
-        <div className="flex items-center space-x-2 mb-2">
-            <span className="text-netflixRed font-black tracking-widest uppercase text-3xl font-display drop-shadow-lg">PORTFOLIO</span>
-        </div>
-        
-        <h1 className="text-5xl md:text-7xl font-display font-bold text-white drop-shadow-xl leading-none">
-          {HERO_CONTENT.title}
-        </h1>
+      <div className="absolute top-[35%] left-16 z-20 pr-16">
+        <div className="relative -ml-16 w-screen max-w-[calc(100vw-4rem)]">
+          <div className="overflow-x-scroll scrollbar-hide no-scrollbar scroll-smooth pl-16">
+            <div className="w-[672px] space-y-5 flex-shrink-0">
+              <h1 className="text-8xl font-display font-bold text-white drop-shadow-2xl leading-none whitespace-nowrap">
+                {HERO_CONTENT.title}
+              </h1>
 
-        <h2 className="text-lg md:text-2xl font-bold text-gray-200 drop-shadow-lg">
-           {HERO_CONTENT.subtitle}
-        </h2>
-        
-        <p className="text-base md:text-lg text-gray-200 drop-shadow-md max-w-lg line-clamp-3 md:line-clamp-none">
-          {HERO_CONTENT.description}
-        </p>
+              <h2 className="text-2xl font-semibold text-white drop-shadow-lg whitespace-nowrap">
+                 {HERO_CONTENT.subtitle}
+              </h2>
+              
+              <p className="text-lg text-white/90 drop-shadow-md leading-relaxed whitespace-normal">
+                {HERO_CONTENT.description}
+              </p>
 
-        <div className="flex flex-wrap items-center gap-4 pt-4">
-          <a href={CONTACT_INFO.resume} target="_blank" rel="noreferrer" className="flex items-center bg-white text-black px-6 py-2 rounded hover:bg-opacity-80 transition font-bold text-lg cursor-pointer">
-            <Download className="w-5 h-5 mr-2" />
-            Resume
-          </a>
-          <a href={CONTACT_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center bg-[#0077b5] text-white px-6 py-2 rounded hover:bg-[#006097] transition font-bold text-lg cursor-pointer">
-            <Linkedin className="w-5 h-5 mr-2" />
-            LinkedIn
-          </a>
-          <a href={CONTACT_INFO.github} target="_blank" rel="noreferrer" className="flex items-center bg-[gray]/70 text-white px-6 py-2 rounded hover:bg-[gray]/50 transition font-bold text-lg cursor-pointer">
-            <Github className="w-5 h-5 mr-2" />
-            GitHub
-          </a>
-          <button 
-            onClick={onContactClick}
-            className="flex items-center bg-[gray]/70 text-white px-6 py-2 rounded hover:bg-[gray]/50 transition font-bold text-lg cursor-pointer"
-          >
-             Contact Me
-          </button>
+              <div className="flex items-center gap-3 pt-2">
+                <a href={CONTACT_INFO.resume} target="_blank" rel="noreferrer" className="flex items-center justify-center bg-white text-netflixBlack px-6 py-2.5 rounded font-semibold text-sm cursor-pointer hover:bg-opacity-90 transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap flex-shrink-0">
+                  <Download className="w-4 h-4 mr-2" />
+                  Resume
+                </a>
+                <Link 
+                  to="/about"
+                  className="flex items-center justify-center bg-netflixGray/80 text-white px-6 py-2.5 rounded font-semibold text-sm cursor-pointer hover:bg-netflixGray transition-all duration-200 hover:scale-105 active:scale-95 border border-white/30 whitespace-nowrap flex-shrink-0"
+                >
+                  About
+                </Link>
+                <button 
+                  onClick={onContactClick}
+                  className="flex items-center justify-center bg-netflixGray/80 text-white px-6 py-2.5 rounded font-semibold text-sm cursor-pointer hover:bg-netflixGray transition-all duration-200 hover:scale-105 active:scale-95 border border-white/30 whitespace-nowrap flex-shrink-0"
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  Contact Me
+                </button>
+                <a href={CONTACT_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center justify-center bg-netflixGray/80 text-white px-6 py-2.5 rounded font-semibold text-sm cursor-pointer hover:bg-netflixGray transition-all duration-200 hover:scale-105 active:scale-95 border border-white/30 whitespace-nowrap flex-shrink-0">
+                  <Linkedin className="w-4 h-4 mr-2" />
+                  LinkedIn
+                </a>
+                <a href={CONTACT_INFO.github} target="_blank" rel="noreferrer" className="flex items-center justify-center bg-netflixGray/80 text-white px-6 py-2.5 rounded font-semibold text-sm cursor-pointer hover:bg-netflixGray transition-all duration-200 hover:scale-105 active:scale-95 border border-white/30 whitespace-nowrap flex-shrink-0">
+                  <Github className="w-4 h-4 mr-2" />
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
