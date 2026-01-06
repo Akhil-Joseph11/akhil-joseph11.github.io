@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { Home } from './components/Home';
 import { About } from './components/About';
@@ -17,7 +18,7 @@ const App: React.FC = () => {
     <div className="relative min-h-screen bg-netflixBlack font-sans pb-20 selection:bg-netflixRed selection:text-white">
       <Navbar onSearchSelect={setSelectedItem} onContactClick={() => setIsContactOpen(true)} />
       
-      <main>
+      <main className="transition-opacity duration-300 ease-in-out">
         <Routes>
           <Route path="/" element={<Home onSearchSelect={setSelectedItem} onContactClick={() => setIsContactOpen(true)} />} />
           <Route path="/about" element={<About />} />
@@ -28,9 +29,11 @@ const App: React.FC = () => {
         <DetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
       )}
 
-      {isContactOpen && (
-        <ContactModal onClose={() => setIsContactOpen(false)} />
-      )}
+      <AnimatePresence mode="wait">
+        {isContactOpen && (
+          <ContactModal key="contact-modal" onClose={() => setIsContactOpen(false)} />
+        )}
+      </AnimatePresence>
 
       <footer className="px-16 py-12 max-w-7xl mx-auto text-netflixLightGray text-sm border-t border-white/10">
         <div className="flex flex-row justify-between items-center mb-8 gap-6">

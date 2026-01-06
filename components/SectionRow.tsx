@@ -36,14 +36,14 @@ export const SectionRow: React.FC<SectionRowProps> = ({ id, title, items, onSele
       
       <div className="group relative -ml-2">
         <ChevronLeft 
-          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-12 w-12 cursor-pointer opacity-0 transition-all duration-200 hover:scale-125 group-hover:opacity-100 bg-netflixBlack/80 hover:bg-netflixBlack rounded-full p-2 ${!isMoved && 'hidden'}`} 
+          className={`absolute top-0 bottom-0 left-2 z-[60] m-auto h-12 w-12 cursor-pointer opacity-0 transition-all duration-200 hover:scale-125 hover:opacity-100 group-hover:opacity-100 bg-netflixBlack/80 hover:bg-netflixBlack rounded-full p-2 pointer-events-auto ${!isMoved && 'hidden'}`} 
           onClick={() => handleClick('left')}
           aria-label="Scroll left"
         />
         
         <div 
           ref={rowRef}
-          className="flex items-center space-x-3.5 overflow-x-scroll scrollbar-hide p-2 py-8 no-scrollbar scroll-smooth"
+          className="flex items-center space-x-3.5 overflow-x-scroll scrollbar-hide pl-8 pr-2 py-8 no-scrollbar scroll-smooth"
         >
           {items.map((item) => (
             <ContentCard key={item.id} item={item} onSelect={onSelect} />
@@ -51,7 +51,7 @@ export const SectionRow: React.FC<SectionRowProps> = ({ id, title, items, onSele
         </div>
         
         <ChevronRight 
-          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-12 w-12 cursor-pointer opacity-0 transition-all duration-200 hover:scale-125 group-hover:opacity-100 bg-netflixBlack/80 hover:bg-netflixBlack rounded-full p-2" 
+          className="absolute top-0 bottom-0 right-2 z-[60] m-auto h-12 w-12 cursor-pointer opacity-0 transition-all duration-200 hover:scale-125 hover:opacity-100 group-hover:opacity-100 bg-netflixBlack/80 hover:bg-netflixBlack rounded-full p-2 pointer-events-auto" 
           onClick={() => handleClick('right')}
           aria-label="Scroll right"
         />

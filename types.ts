@@ -19,6 +19,9 @@ export interface ContentItem {
   matchPercentage: number;
   tags: string[];
   link?: string;
+  codeLink?: string;
+  playLink?: string;
+  websiteLink?: string;
 }
 
 export interface CategoryRow {

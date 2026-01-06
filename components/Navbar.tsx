@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, Search, Download, Menu, X } from 'lucide-react';
 import { RESUME_DATA, PROFILE_IMAGE, CONTACT_INFO } from '../constants';
 import { ContentItem } from '../types';
@@ -18,6 +19,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
   const [searchResults, setSearchResults] = useState<ContentItem[]>([]);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isNotificationRead, setIsNotificationRead] = useState(() => {
+    return localStorage.getItem('resume-notification-read') === 'true';
+  });
+  const [hasClickedDownload, setHasClickedDownload] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -40,13 +45,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
       }
     };
 
+    const handleWindowFocus = () => {
+      if (hasClickedDownload) {
+        setIsNotificationRead(true);
+        setIsNotificationsOpen(false);
+        setHasClickedDownload(false);
+        localStorage.setItem('resume-notification-read', 'true');
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('focus', handleWindowFocus);
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('focus', handleWindowFocus);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [hasClickedDownload]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -80,18 +96,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
+    
     if (location.pathname !== '/') {
+      sessionStorage.setItem('navigatingFromAnotherPage', 'true');
+      sessionStorage.setItem('disableHeroAnimation', 'true');
+      sessionStorage.setItem('targetSection', id);
       navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
     } else {
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const navbarHeight = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementPosition - navbarHeight,
+          behavior: 'smooth'
+        });
       }
     }
   };
@@ -108,11 +127,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
     }
   };
 
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    if (location.pathname !== '/') {
+      sessionStorage.setItem('navigatingFromAnotherPage', 'true');
+      sessionStorage.removeItem('disableHeroAnimation');
+      sessionStorage.removeItem('targetSection');
+      navigate('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    } else {
+      if (window.location.hash) {
+        window.history.replaceState(null, '', '/');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-netflixBlack shadow-lg' : 'bg-gradient-to-b from-netflixBlack/80 via-netflixBlack/40 to-transparent'}`}>
       <div className="flex items-center justify-between px-4 md:px-16 py-3 md:py-4">
         <div className="flex items-center space-x-4 md:space-x-8">
-          <Link to="/" className="text-netflixRed text-3xl md:text-5xl font-display font-bold cursor-pointer tracking-tight leading-none">
+          <Link to="/" onClick={handleHomeClick} className="text-netflixRed text-3xl md:text-5xl font-display font-bold cursor-pointer tracking-tight leading-none">
             AKHIL
           </Link>
           <ul className="hidden md:flex space-x-4 text-sm font-medium">
@@ -183,24 +221,70 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
           </div>
 
           <div ref={notificationRef} className="relative hidden md:block">
-            <div className="relative cursor-pointer" onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}>
+            <motion.div
+              className="relative cursor-pointer"
+              onClick={() => {
+                const newState = !isNotificationsOpen;
+                setIsNotificationsOpen(newState);
+                if (newState && !isNotificationRead) {
+                  setIsNotificationRead(true);
+                  localStorage.setItem('resume-notification-read', 'true');
+                }
+              }}
+              whileTap={{ scale: 0.85 }}
+              animate={isNotificationsOpen ? { rotate: [0, -10, 10, -10, 0] } : {}}
+              transition={{ 
+                rotate: { duration: 0.5, ease: "easeInOut" },
+                scale: { duration: 0.15 }
+              }}
+            >
               <Bell className="w-5 h-5 text-white hover:text-netflixLightGray transition-colors" />
-              <span className="absolute -top-1 -right-1 bg-netflixRed text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">1</span>
-            </div>
+              {!isNotificationRead && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 bg-netflixRed text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white"
+                >
+                  1
+                </motion.span>
+              )}
+            </motion.div>
             
-            {isNotificationsOpen && (
-              <div className="absolute top-10 right-0 w-80 bg-netflixBlack border border-white/20 text-white shadow-2xl rounded z-50 overflow-hidden">
-                <div className="p-4 border-b border-white/10 flex justify-between items-center hover:bg-netflixGray transition-colors cursor-pointer">
-                  <div className="flex flex-col">
-                    <span className="text-sm font-semibold mb-1 text-white">New Resume Available</span>
-                    <span className="text-xs text-netflixLightGray">Download Akhil's latest CV now.</span>
-                  </div>
-                  <a href={CONTACT_INFO.resume} target="_blank" rel="noreferrer" className="bg-white text-netflixBlack p-2 rounded-full hover:bg-gray-200 transition-colors">
-                    <Download className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            )}
+            <AnimatePresence>
+              {isNotificationsOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="absolute top-10 right-0 w-80 bg-netflixBlack border border-white/20 text-white shadow-2xl rounded z-50 overflow-hidden"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
+                    className="p-4 border-b border-white/10 flex justify-between items-center hover:bg-netflixGray transition-colors cursor-pointer"
+                  >
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold mb-1 text-white">New Resume Available</span>
+                      <span className="text-xs text-netflixLightGray">Download Akhil's latest CV now.</span>
+                    </div>
+                    <a 
+                      href={CONTACT_INFO.resume} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="bg-white text-netflixBlack p-2 rounded-full hover:bg-gray-200 transition-colors"
+                      onClick={() => setHasClickedDownload(true)}
+                    >
+                      <Download className="w-4 h-4" />
+                    </a>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div ref={mobileMenuRef} className="relative md:hidden">
