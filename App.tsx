@@ -8,7 +8,7 @@ import { DetailModal } from './components/DetailModal';
 import { ContactModal } from './components/ContactModal';
 import { CONTACT_INFO } from './constants';
 import { ContentItem } from './types';
-import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
 
 const App: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
@@ -43,7 +43,7 @@ const App: React.FC = () => {
              <a href={`mailto:${CONTACT_INFO.email}`} className="text-white hover:text-netflixRed transition-colors duration-200" aria-label="Email"><Mail className="w-6 h-6" /></a>
           </div>
           <div className="text-right">
-             <p className="flex items-center justify-end gap-2 text-white/90 text-sm"><Phone className="w-4 h-4"/> {CONTACT_INFO.phone}</p>
+             <p className="flex items-center justify-end gap-2 text-white/90 text-sm"><Mail className="w-4 h-4"/> {CONTACT_INFO.email}</p>
              <p className="flex items-center justify-end gap-2 mt-2 text-white/90 text-sm"><MapPin className="w-4 h-4"/> {CONTACT_INFO.location}</p>
           </div>
         </div>

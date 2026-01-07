@@ -149,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-netflixBlack shadow-lg' : 'bg-gradient-to-b from-netflixBlack/80 via-netflixBlack/40 to-transparent'}`}>
       <div className="flex items-center justify-between px-4 md:px-16 py-3 md:py-4">
         <div className="flex items-center space-x-4 md:space-x-8">
-          <Link to="/" onClick={handleHomeClick} className="text-netflixRed text-3xl md:text-5xl font-display font-bold cursor-pointer tracking-tight leading-none">
+          <Link to="/" onClick={handleHomeClick} className="text-netflixRed text-3xl md:text-4xl font-display font-bold cursor-pointer tracking-tight leading-none">
             AKHIL
           </Link>
           <ul className="hidden md:flex space-x-4 text-sm font-medium">

@@ -106,9 +106,7 @@ export const Home: React.FC<HomeProps> = ({ onSearchSelect, onContactClick }) =>
       <Hero onContactClick={onContactClick} isFirstLoad={shouldAnimateHero} />
       
       <div className="relative z-10 mt-12 md:-mt-[8rem] pb-10 space-y-4">
-        <div className="mt-0 md:mt-0 relative">
-          {renderSection('experience', 'Starred in', experience, 0)}
-        </div>
+        {renderSection('experience', 'Starred in', experience, 0)}
         {renderSection('projects', 'Blockbuster Projects', projects, 0.05)}
         {renderSection('skills', 'Top Rated Skills', skills, 0.1)}
         {renderSection('education', 'Education', education, 0.15)}
