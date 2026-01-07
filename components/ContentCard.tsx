@@ -10,12 +10,17 @@ interface ContentCardProps {
 export const ContentCard: React.FC<ContentCardProps> = ({ item, onSelect }) => {
   const [isPlusAnimated, setIsPlusAnimated] = useState(false);
   const [isLikeAnimated, setIsLikeAnimated] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
     <div 
-      className="group relative h-[180px] min-w-[320px] cursor-pointer transition-transform duration-300 hover:scale-[1.15] hover:z-50 origin-center ease-out active:scale-[1.15]"
+      className="group relative h-[180px] min-w-[320px] max-w-[320px] flex-shrink-0 cursor-pointer transition-all duration-300 hover:scale-[1.15] hover:z-50 origin-center ease-out active:scale-[1.15] isolate rounded"
       onClick={() => onSelect(item)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ border: isHovered ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent', flexShrink: 0, flexGrow: 0 }}
     >
-      <div className={`h-full w-full rounded overflow-hidden ${item.isLogo ? 'bg-white p-4' : 'bg-netflixBlack'} relative shadow-2xl`}>
+      <div className={`h-full w-full rounded overflow-hidden ${item.isLogo ? 'bg-white p-2 md:p-4' : 'bg-netflixBlack'} relative shadow-2xl transition-all duration-300`}>
         <img
           src={item.image}
           alt={item.title}
@@ -23,7 +28,6 @@ export const ContentCard: React.FC<ContentCardProps> = ({ item, onSelect }) => {
         />
         
         <div className="absolute inset-0 bg-gradient-to-t from-netflixBlack via-netflixBlack/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
-          
           <div className="flex items-center space-x-2 mb-2 translate-y-6 group-hover:translate-y-0 transition-transform duration-300 ease-out">
              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-netflixBlack hover:bg-gray-200 transition-all duration-200 hover:scale-110">
                 <Play className="w-4 h-4 fill-netflixBlack ml-0.5" />

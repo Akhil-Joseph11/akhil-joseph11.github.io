@@ -29,8 +29,8 @@ export const SectionRow: React.FC<SectionRowProps> = ({ id, title, items, onSele
   };
 
   return (
-    <div id={id} className="h-fit space-y-4 px-16 my-8 scroll-mt-24">
-      <h2 className="w-56 cursor-pointer text-2xl font-semibold text-white transition-colors duration-200 hover:text-netflixRed">
+    <div id={id} className="h-fit space-y-4 px-4 md:px-16 my-8 md:my-8 scroll-mt-24 relative z-20 md:z-auto">
+      <h2 className="w-56 text-2xl font-semibold text-white relative">
         {title}
       </h2>
       

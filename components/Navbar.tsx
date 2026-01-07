@@ -136,12 +136,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
       sessionStorage.removeItem('targetSection');
       navigate('/');
       setTimeout(() => {
+        window.history.replaceState(null, '', '#');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 100);
     } else {
-      if (window.location.hash) {
-        window.history.replaceState(null, '', '/');
-      }
+      window.history.replaceState(null, '', '#');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -183,7 +182,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearchSelect, onContactClick }
         </div>
         
         <div className="flex items-center space-x-3 md:space-x-6 text-white relative">
-          
           <div ref={searchRef} className={`flex items-center transition-all duration-200 ${isSearchOpen ? 'bg-netflixBlack border border-white/30' : ''} p-1.5 rounded`}>
             <Search 
               className={`w-4 h-4 md:w-5 md:h-5 cursor-pointer text-white hover:text-netflixLightGray transition-colors ${isSearchOpen ? 'mr-2' : ''}`} 

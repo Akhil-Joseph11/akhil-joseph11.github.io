@@ -211,10 +211,10 @@ export const RESUME_DATA: ContentItem[] = [
     date: 'Aug 2024 – May 2026',
     location: 'Los Angeles, USA',
     description: [
-      'EPISODE_DESCRIPTION:The advanced training arc. Located in the tech hub of Los Angeles, this program delivers a comprehensive, rigorous curriculum bridging theoretical computer science with applied software engineering. The coursework spans the full spectrum of modern computing—from the fundamental mathematics of algorithms to the frontier of generative agents.',
-      'KEY_SCENE:Graduate Researcher: Investigating 3D Computer Vision and neural rendering techniques for spatial computing. Focused on developing robust algorithms for 3D reconstruction and geometric analysis.',
-      'KEY_SCENE:Academic Distinction: Maintaining a 3.91/4.0 GPA while navigating a diverse and challenging course load.',
-      'KEY_SCENE:Systems & AI Mix: pursuing a balanced curriculum that combines high-level Software Architectures and Database Systems with cutting-edge electives like Agentic Information Retrieval and Machine Learning.'
+      'EPISODE_DESCRIPTION:Akhil pursues his Master\'s degree in the heart of Los Angeles. This curriculum bridges the gap between theoretical computer science and applied software engineering, ranging from algorithms to generative agents.',
+      'KEY_SCENE:Graduate Researcher: Investigating 3D Computer Vision and neural rendering techniques for spatial computing.',
+      'KEY_SCENE:Academic Standing: Maintaining a 3.91/4.0 GPA while navigating a rigorous technical curriculum.',
+      'KEY_SCENE:Specialization: Combining High-Level Software Architectures with electives in Agentic Retrieval and Machine Learning.'
     ],
     image: '/images/USC-logo.png',
     isLogo: true,
@@ -230,10 +230,10 @@ export const RESUME_DATA: ContentItem[] = [
     date: 'July 2018 – May 2022',
     location: 'Vellore, India',
     description: [
-      'EPISODE_DESCRIPTION:The Origin Story. Before the advanced AI research, there was the engineering forge. This four-year saga documents the rigorous transformation from student to engineer at one of India\'s premier technical institutes. It focuses on mastering the "First Principles" of computing—building the unshakeable mental models required to architect modern software systems.',
-      'KEY_SCENE:High Distinction: Graduated with a stellar 9.11/10.0 CGPA, ranking among the top percentile of the cohort.',
-      'KEY_SCENE:The Engineering Core: Mastered the absolute fundamentals of the discipline, including Data Structures, Algorithms, Operating Systems, and Computer Networks.',
-      'KEY_SCENE:Capstone Development: Translated theory into practice through intensive lab work and end-to-end software engineering projects, laying the groundwork for full-stack capability.'
+      'EPISODE_DESCRIPTION:Akhil earned his undergraduate degree at one of India\'s premier technical institutes. This program established the rigorous engineering fundamentals required for scalable system design.',
+      'KEY_SCENE:Graduated with Distinction: Achieved a stellar 9.11/10.0 CGPA, ranking in the top percentile of the cohort.',
+      'KEY_SCENE:The Engineering Core: Mastered the fundamentals including Data Structures, Algorithms, and Operating Systems.',
+      'KEY_SCENE:Capstone Development: Translated theory into practice through intensive lab work and end-to-end software projects.'
     ],
     image: '/images/VIT-logo.png',
     isLogo: true,
@@ -244,80 +244,84 @@ export const RESUME_DATA: ContentItem[] = [
   {
     id: 'skill-1',
     type: ContentType.Skill,
-    title: 'The Modern Stack',
-    subtitle: 'Full-Stack Architecture | Web Ecosystem',
+    title: 'The Full-Stack Architect',
+    subtitle: 'Full-Stack Architecture',
     description: [
-      'EPISODE_DESCRIPTION:Modern web development requires more than just connecting a database to a UI. This skill set focuses on architecting scalable, high-performance applications that handle real-time data and complex user interactions without breaking a sweat.',
-      'KEY_SCENE:Frontend Mastery: Expert in React.js and Next.js 14, utilizing Server-Side Rendering (SSR) and Edge Functions for lightning-fast UX.',
-      'KEY_SCENE:Backend Orchestration: Building robust microservices with Node.js and Express, managing traffic with Redis caching and secure REST/GraphQL APIs.',
-      'KEY_SCENE:Database Design: Architecting schemas across NoSQL (MongoDB) and Relational (PostgreSQL) systems for atomic consistency.'
+      'EPISODE_DESCRIPTION:Akhil constructs high-performance web ecosystems using Next.js and Node.js. A production-ready approach that turns complex data streams into seamless, lightning-fast user experiences.',
+      'KEY_SCENE:Frontend Architecture: Leveraging React.js and Next.js 14 to deliver Server-Side Rendering (SSR) and Edge interactions.',
+      'KEY_SCENE:Backend Orchestration: Constructing robust microservices with Node.js and Express, optimized via Redis caching.',
+      'KEY_SCENE:Database Design: Implementing atomic schemas across NoSQL (MongoDB) and Relational (PostgreSQL) systems.'
     ],
     image: '/images/FullStack-Development.jpg',
     matchPercentage: 99,
     tags: ['Next.js', 'TypeScript', 'Microservices', 'System Design', 'MERN'],
+    location: 'Remote / Online',
   },
   {
     id: 'skill-2',
     type: ContentType.Skill,
     title: 'The AI Specialist',
-    subtitle: 'Artificial Intelligence & Vision | R&D',
+    subtitle: 'Artificial Intelligence & Vision',
     description: [
-      'EPISODE_DESCRIPTION:Where code meets cognition. This collection represents deep experience in teaching machines to see, read, and reason. From constructing Generative AI pipelines to engineering custom Convolutional Neural Networks for safety systems.',
-      'KEY_SCENE:Generative AI: Engineering RAG (Retrieval-Augmented Generation) pipelines using LangChain, Pinecone, and Local LLMs (Ollama/Llama 3).',
-      'KEY_SCENE:Computer Vision: Developing custom CNN architectures in TensorFlow/Keras and real-time tracking systems with OpenCV.',
-      'KEY_SCENE:Data Science: Leveraging Pandas and Scikit-learn for complex data analysis, feature engineering, and predictive modeling.'
+      'EPISODE_DESCRIPTION:Bridging academic research with production engineering. Akhil deploys advanced pipelines for Generative AI and trains custom computer vision systems for real-world analysis.',
+      'KEY_SCENE:Generative AI: Engineering RAG pipelines using LangChain, Pinecone, and Local LLMs (Ollama/Llama 3).',
+      'KEY_SCENE:Computer Vision: Deploying custom CNN architectures in TensorFlow/Keras and real-time tracking with OpenCV.',
+      'KEY_SCENE:Data Science: Utilizing Pandas and Scikit-learn for complex feature engineering and predictive modeling.'
     ],
     image: '/images/Tools-Cloud.jpg',
     matchPercentage: 98,
     tags: ['Deep Learning', 'Generative AI', 'Computer Vision', 'Python', 'PyTorch'],
+    location: 'Remote / Online',
   },
   {
     id: 'skill-3',
     type: ContentType.Skill,
     title: 'The Core Engineer',
-    subtitle: 'Systems & Infrastructure | DevOps & Core',
+    subtitle: 'Systems & DevOps',
     description: [
-      'EPISODE_DESCRIPTION:The engine room of software. This category covers the foundational languages and operational tools that ensure code isn\'t just written, but deployed, scaled, and optimized for production environments.',
-      'KEY_SCENE:Polyglot Programming: Strong command of core algorithmic languages including Java, C++, and Python for high-efficiency computing.',
-      'KEY_SCENE:DevOps & Cloud: Containerizing applications with Docker, managing CI/CD pipelines, and deploying to Azure and Vercel.',
-      'KEY_SCENE:Tooling: Proficiency in Git for version control, Postman for API testing, and Alteryx for automated workflow analytics.'
+      'EPISODE_DESCRIPTION:The foundational layer of operations. Akhil optimizes algorithmic efficiency and orchestrates deployment logistics, ensuring code is robust, containerized, and cloud-ready.',
+      'KEY_SCENE:Polyglot Programming: Utilizing core algorithmic languages including Java, C++, and Python for high-efficiency computing.',
+      'KEY_SCENE:DevOps & Cloud: Containerizing applications with Docker and managing CI/CD pipelines on Azure and Vercel.',
+      'KEY_SCENE:Tooling: Standardizing version control with Git and automated workflow analytics.'
     ],
     image: '/images/Languages-Core.jpg',
     matchPercentage: 95,
     tags: ['Docker', 'Java', 'C++', 'Azure', 'Algorithms', 'CI/CD'],
+    location: 'Remote / Online',
   },
   {
     id: 'ach-1',
     type: ContentType.Achievement,
     title: 'VIT Hack 2020 Winner',
-    subtitle: 'VIT Hack 2020 Champion',
+    subtitle: 'Competition: Rapid Prototyping Sprint',
     date: '2020',
     description: [
-      'EPISODE_DESCRIPTION:The ultimate test of speed and skill. In this high-intensity 36-hour sprint, Akhil led a team to victory against a crowded field of developers. The challenge: untangling the chaos of large-scale e-commerce data. The solution: a deep learning classifier built from scratch that delivered actionable insights before the clock hit zero.',
-      'KEY_SCENE:The Problem: Tasked with classifying massive, unstructured datasets from Amazon to optimize product categorization.',
-      'KEY_SCENE:The Solution: Engineered a Deep Learning pipeline that automated the sorting process, achieving higher accuracy than the competition.',
-      'KEY_SCENE:The Result: Secured 1st Place, validating the ability to ship production-grade AI solutions under extreme deadlines.'
+      'EPISODE_DESCRIPTION:Akhil led a team to victory in a high-intensity 36-hour development sprint. The challenge involved automating the classification of large-scale e-commerce datasets using machine learning.',
+      'KEY_SCENE:The Challenge: Tasked with classifying massive, unstructured datasets from Amazon to optimize product categorization.',
+      'KEY_SCENE:The Solution: Engineered a Deep Learning pipeline that automated the sorting process with high accuracy.',
+      'KEY_SCENE:The Result: Secured 1st Place, validating the ability to ship functional AI prototypes under extreme deadlines.'
     ],
     image: '/images/VIT-logo.png',
     isLogo: true,
     matchPercentage: 100,
     tags: ['Deep Learning', 'Python', 'Team Leadership', 'Crisis Management'],
+    location: 'Remote / Online',
   },
   {
     id: 'ach-2',
     type: ContentType.Achievement,
     title: 'Competitive Chess',
-    subtitle: 'Competitive Chess View Profile',
+    subtitle: 'Mind Sport: Strategic Performance',
     date: 'Rated 1900+',
     description: [
-      'EPISODE_DESCRIPTION:Strategy is a muscle. With a competitive rating of 1900+, Akhil operates in the top percentile of global players. This isn\'t just a game; it is a gym for algorithmic thinking. It requires deep calculation trees, rapid pattern recognition, and the mental fortitude to make irreversible decisions under strict time controls.',
-      'KEY_SCENE:Algorithmic Thinking: Applying decision trees and heuristic analysis in real-time to outmaneuver opponents.',
-      'KEY_SCENE:Grace Under Pressure: Managing the clock in high-stakes tournament settings, mirroring the pressure of live engineering deployments.',
-      'KEY_SCENE:Pattern Recognition: Identifying tactical motifs instantly—a skill that translates directly to debugging and system architecture.'
+      'EPISODE_DESCRIPTION:Akhil competes at a high level with a rating of 1900+, placing him in the top percentile of global players. This discipline sharpens decision-making and pattern recognition under strict time constraints.',
+      'KEY_SCENE:Strategic Depth: Applying deep calculation trees and heuristic analysis in real-time to outmaneuver opponents.',
+      'KEY_SCENE:Pattern Recognition: Identifying tactical motifs instantly—a parallel to complex system debugging.'
     ],
     image: '/images/Chess.jpg',
     matchPercentage: 98,
     tags: ['Strategy', 'Game Theory', 'Time Management', 'Critical Thinking'],
+    location: 'Remote / Online',
     link: 'https://lichess.org/@/AkhilJoseph'
   }
 ];

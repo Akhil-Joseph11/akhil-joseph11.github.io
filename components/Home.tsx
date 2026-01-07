@@ -47,15 +47,16 @@ export const Home: React.FC<HomeProps> = ({ onSearchSelect, onContactClick }) =>
   }, [isFirstLoad]);
 
   useEffect(() => {
+    if (location.pathname === '/' && !location.hash) {
+      window.history.replaceState(null, '', '#');
+    }
+    
     const targetSection = sessionStorage.getItem('targetSection');
-    const hash = location.hash.replace('#', '');
+    const hash = location.hash.replace('#', '').replace('/', '');
     const comingFromAnotherPage = sessionStorage.getItem('navigatingFromAnotherPage') === 'true';
     const validSections = ['experience', 'projects', 'skills', 'education'];
     const sectionId = targetSection || (hash && validSections.includes(hash) ? hash : null);
     
-    if (sessionStorage.getItem('navigatingFromAbout') === 'true') {
-      sessionStorage.removeItem('navigatingFromAbout');
-    }
     if (targetSection) {
       sessionStorage.removeItem('targetSection');
     }
@@ -104,8 +105,10 @@ export const Home: React.FC<HomeProps> = ({ onSearchSelect, onContactClick }) =>
     <>
       <Hero onContactClick={onContactClick} isFirstLoad={shouldAnimateHero} />
       
-      <div className="relative z-30 -mt-[8rem] md:-mt-[10rem] pb-10 space-y-4">
-        {renderSection('experience', 'Starred in', experience, 0)}
+      <div className="relative z-10 mt-12 md:-mt-[8rem] pb-10 space-y-4">
+        <div className="mt-0 md:mt-0 relative">
+          {renderSection('experience', 'Starred in', experience, 0)}
+        </div>
         {renderSection('projects', 'Blockbuster Projects', projects, 0.05)}
         {renderSection('skills', 'Top Rated Skills', skills, 0.1)}
         {renderSection('education', 'Education', education, 0.15)}

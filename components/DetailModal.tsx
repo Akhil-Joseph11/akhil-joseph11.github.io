@@ -159,9 +159,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ item, onClose }) => {
                     )}
                     {item.id === 'ach-2' && (
                       <>
-                        <span className="text-white/70">Rank A</span>
                         <span className="text-white/70">Mind Sport</span>
-                        <span className="text-white font-semibold">Strategic Performance</span>
                       </>
                     )}
                     {!isAchievement && <span className="text-white font-semibold">{item.subtitle}</span>}
