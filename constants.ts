@@ -9,25 +9,6 @@ const IMAGES = {
 
 export const RESUME_DATA: ContentItem[] = [
   {
-    id: 'exp-1',
-    type: ContentType.Experience,
-    title: 'Institute for Creative Technologies',
-    subtitle: 'Systems Development Intern',
-    date: 'May 2025 – August 2025',
-    location: 'Los Angeles, USA',
-    description: [
-      'EPISODE_DESCRIPTION:Working at the intersection of research and engineering, Akhil developed automated pipelines to transform 2D drone footage into hyper-realistic 3D environments. This role focused on scaling cutting-edge Gaussian Splatting techniques for urban scene reconstruction.',
-      'KEY_SCENE:3D Reconstruction: Engineered high-fidelity models of urban infrastructure using Gaussian Splatting and multi-angle drone imagery.',
-      'KEY_SCENE:Data Pipelines: Built automated scripts to extract and process frames from large-scale video datasets, generating dense 3D point clouds.',
-      'KEY_SCENE:Optimization: Refined photogrammetry workflows to improve rendering speed and visual quality for research-grade outputs.'
-    ],
-    image: '/images/USC-ICT.png',
-    isLogo: true,
-    matchPercentage: 98,
-    tags: ['Python', 'Gaussian Splatting', 'Computer Vision', 'Photogrammetry'],
-    link: 'https://ict.usc.edu/'
-  },
-  {
     id: 'exp-2',
     type: ContentType.Experience,
     title: 'Shell',
@@ -212,8 +193,7 @@ export const RESUME_DATA: ContentItem[] = [
     location: 'Los Angeles, USA',
     description: [
       'EPISODE_DESCRIPTION:Akhil pursues his Master\'s degree in the heart of Los Angeles. This curriculum bridges the gap between theoretical computer science and applied software engineering, ranging from algorithms to generative agents.',
-      'KEY_SCENE:Graduate Researcher: Investigating 3D Computer Vision and neural rendering techniques for spatial computing.',
-      'KEY_SCENE:Academic Standing: Maintaining a 3.91/4.0 GPA while navigating a rigorous technical curriculum.',
+      'KEY_SCENE:Academic Standing: Maintaining a 3.92/4.0 GPA while navigating a rigorous technical curriculum.',
       'KEY_SCENE:Specialization: Combining High-Level Software Architectures with electives in Agentic Retrieval and Machine Learning.'
     ],
     image: '/images/USC-logo.png',
@@ -329,7 +309,7 @@ export const RESUME_DATA: ContentItem[] = [
 export const HERO_CONTENT = {
   title: "AKHIL JOSEPH",
   subtitle: "Full-Stack Engineer Building Intelligent Systems",
-  description: "From the enterprise architecture of Shell to the research labs of USC, Akhil Joseph engineers the systems that power modern tech. This season, watch as he bridges the gap between scalable Full-Stack development and the Generative AI revolution. Featuring complex storylines involving RAG pipelines, System Design, Cloud-Native Architecture.",
+  description: "From the enterprise architecture of Shell to graduate studies at USC, Akhil Joseph engineers the systems that power modern tech. This season, watch as he bridges the gap between scalable Full-Stack development and the Generative AI revolution. Featuring complex storylines involving RAG pipelines, System Design, Cloud-Native Architecture.",
   images: [IMAGES.bench, IMAGES.beach, IMAGES.thumbnail]
 };
 

@@ -16,27 +16,13 @@ interface TimelineItem {
 
 const timelineData: TimelineItem[] = [
   {
-    id: 'ict',
-    date: 'May 2025 – Aug 2025',
-    role: 'Systems Development Intern',
-    company: 'Institute for Creative Technologies',
-    location: 'Los Angeles',
-    highlights: [
-      'Working at the intersection of research and engineering on 3D Gaussian Splatting.',
-      'Engineered high-fidelity models of urban infrastructure using multi-angle drone imagery.',
-      'Built automated scripts to extract and process frames from large-scale video datasets.'
-    ],
-    type: 'experience'
-  },
-  {
     id: 'usc',
     date: 'Aug 2024 – May 2026',
     role: 'Master\'s Degree in Computer Science',
     company: 'University of Southern California',
     location: 'Los Angeles',
     highlights: [
-      'GPA: 3.91/4.0 | Focus: AI & Computer Vision',
-      'Graduate Researcher in 3D Vision & Neural Rendering',
+      'GPA: 3.92/4.0 | Focus: AI & Software Engineering',
       'Coursework: Machine Learning, Agentic AI, Game Dev, Software Architectures'
     ],
     type: 'education'

@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick, isFirstLoad = true }
           <motion.img 
             src="/images/Akhil-banner.png" 
             alt="Akhil Banner" 
-            className="h-full w-full object-cover" 
+            className="relative z-0 h-full w-full object-cover" 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
@@ -26,11 +26,11 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick, isFirstLoad = true }
           <img 
             src="/images/Akhil-banner.png" 
             alt="Akhil Banner" 
-            className="h-full w-full object-cover" 
+            className="relative z-0 h-full w-full object-cover" 
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-netflixBlack via-netflixBlack/70 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent md:from-netflixBlack md:via-netflixBlack/30"></div>
+        <div className="hero-overlay-left" aria-hidden="true" />
+        <div className="hero-overlay-bottom" aria-hidden="true" />
       </div>
 
       <div className="relative md:absolute top-auto md:top-[35%] bottom-2 md:bottom-auto mt-auto md:mt-0 pt-24 md:pt-0 left-0 md:left-16 z-30 px-4 md:pr-16 pb-2 md:pb-0 max-w-full">

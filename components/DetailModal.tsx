@@ -24,7 +24,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ item, onClose }) => {
   if (!item) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-netflixBlack/95 backdrop-blur-sm flex justify-center items-start pt-4 md:pt-8 px-2 md:px-4">
+    <div className="modal-backdrop fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex justify-center items-start pt-4 md:pt-8 px-2 md:px-4">
       <div className="relative w-full max-w-4xl bg-netflixBlack rounded-lg shadow-2xl overflow-hidden mb-4 md:mb-10">
         <button 
           onClick={onClose}
@@ -35,7 +35,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ item, onClose }) => {
         </button>
 
         <div className={`relative h-[40vh] md:h-[50vh] w-full ${item.isLogo ? 'bg-white' : 'bg-netflixDark'}`}>
-          <div className="absolute inset-0 bg-gradient-to-t from-netflixBlack via-netflixBlack/80 via-netflixBlack/60 via-netflixBlack/40 to-transparent z-10"></div>
+          <div className="modal-header-overlay" aria-hidden="true" />
           
           <img 
             src={item.image} 
@@ -174,7 +174,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ item, onClose }) => {
 
             <div className="space-y-4 mb-4 md:mb-6">
               {(() => {
-                const hasNetflixStyle = ['exp-1', 'exp-2', 'exp-3', 'proj-1', 'proj-2', 'proj-3', 'proj-4', 'proj-5', 'proj-6', 'proj-7', 'skill-1', 'skill-2', 'skill-3', 'edu-1', 'edu-2', 'ach-1', 'ach-2'].includes(item.id);
+                const hasNetflixStyle = ['exp-2', 'exp-3', 'proj-1', 'proj-2', 'proj-3', 'proj-4', 'proj-5', 'proj-6', 'proj-7', 'skill-1', 'skill-2', 'skill-3', 'edu-1', 'edu-2', 'ach-1', 'ach-2'].includes(item.id);
                 const isSkill = ['skill-1', 'skill-2', 'skill-3'].includes(item.id);
                 const isEducation = ['edu-1', 'edu-2'].includes(item.id);
                 
@@ -227,7 +227,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ item, onClose }) => {
           <div className="col-span-1 space-y-4 md:space-y-6">
             <div>
               {(() => {
-                const hasNetflixStyle = ['exp-1', 'exp-2', 'exp-3', 'proj-1', 'proj-2', 'proj-3', 'proj-4', 'proj-5', 'proj-6', 'proj-7', 'skill-1', 'skill-2', 'skill-3', 'edu-1', 'edu-2', 'ach-1', 'ach-2'].includes(item.id);
+                const hasNetflixStyle = ['exp-2', 'exp-3', 'proj-1', 'proj-2', 'proj-3', 'proj-4', 'proj-5', 'proj-6', 'proj-7', 'skill-1', 'skill-2', 'skill-3', 'edu-1', 'edu-2', 'ach-1', 'ach-2'].includes(item.id);
                 const isEducation = ['edu-1', 'edu-2'].includes(item.id);
                 const label = hasNetflixStyle ? (isEducation ? 'Cast (Coursework):' : 'Cast:') : 'Tags:';
                 

@@ -22,7 +22,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-[60] overflow-y-auto overflow-x-hidden bg-netflixBlack/95 backdrop-blur-sm flex justify-center items-center px-4 py-4"
+      className="modal-backdrop fixed inset-0 z-[60] overflow-y-auto overflow-x-hidden flex justify-center items-center px-4 py-4"
       onClick={onClose}
     >
         <motion.div
